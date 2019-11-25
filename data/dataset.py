@@ -1,9 +1,12 @@
 import torch
+from torch.utils.data.sampler import SubsetRandomSampler
 import torchvision.transforms as transforms
 import os
 import errno
 import tarfile
 from PIL import Image
+from data.cv_dataset import get_cv_datasets, cv_datasets_to_dataloaders
+import numpy as np
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -104,14 +107,40 @@ class StrangeSymbols(torch.utils.data.Dataset):
         return fmt_str
 
 
-def get_strange_symbol_loader(batch_size):
+def get_strange_symbol_loader(batch_size, validation_split=0.1):
     transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, ), (0.5, ))]
     )
-    trainset = StrangeSymbols(train=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=2)
-    return trainloader
+    train_set = StrangeSymbols(train=True, transform=transform)
+
+    dataset_size = len(train_set)
+    indices = list(range(dataset_size))
+    split = int(np.floor(validation_split * dataset_size))
+    np.random.shuffle(indices)
+    train_indices, val_indices = indices[split:], indices[:split]
+
+    # Creating PT data samplers and loaders:
+    train_sampler = SubsetRandomSampler(train_indices)
+    val_sampler = SubsetRandomSampler(val_indices)
+
+    train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, sampler=train_sampler, num_workers=2)
+    val_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, sampler=val_sampler, num_workers=2)
+
+    return train_loader, val_loader
+
+
+def get_strange_symbol_cv_loaders(batch_size, k):
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+         transforms.Normalize((0.5,), (0.5,))]
+    )
+    train_set = StrangeSymbols(train=True, transform=transform)
+
+    cv_datasets = get_cv_datasets(train_set, k)
+    cv_loaders = cv_datasets_to_dataloaders(cv_datasets, batch_size, 2)
+
+    return cv_loaders
 
 
 def get_strange_symbols_test_data():

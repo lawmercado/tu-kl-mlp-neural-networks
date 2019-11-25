@@ -1,16 +1,24 @@
 import argparse
 import torch
 import numpy as np
-from data.dataset import get_strange_symbol_loader, get_strange_symbols_test_data
-from nn.net import Net
-from torch import nn
-from torch import optim
+import matplotlib.pyplot as plt
+from data.dataset import get_strange_symbol_loader, get_strange_symbol_cv_loaders, get_strange_symbols_test_data
+from nn.net1 import Net
+from operations import train, test
+from sklearn.metrics import confusion_matrix
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--learning_rate", type=float, default=0.05, help="the learning rate")
-parser.add_argument("--momentum", type=float, default=0.85, help="the momentum")
-parser.add_argument("--batch_size", type=float, default=128, help="the batch size")
-parser.add_argument("--seed", type=int, help="the seed to consider in random numbers generation")
+parser.add_argument('--lr', type=float, default=0.05, help='the learning rate')
+parser.add_argument('--momentum', type=float, default=0.85, help='the momentum')
+parser.add_argument('--patience', type=int, default=5, help='the patience factor for the early stopping')
+parser.add_argument('--batch_size', type=float, default=128, help='the batch size')
+parser.add_argument('--crossvalidate', type=int,
+                    help='whether should the model be validated with crossvalidation k parameter or not')
+parser.add_argument('--holdout', type=float, help='whether should the model be validated with the holdout '
+                                                  '(with percentage for the validation) method or not')
+parser.add_argument('--confusion_matrix', action='store_true', help='whether should the confusion matrix be generated')
+parser.add_argument('--plot', action='store_true', help='whether the results should be plotted')
+parser.add_argument('--seed', type=int, help='the seed to consider in random numbers generation for reproducibility')
 
 args = parser.parse_args()
 
@@ -19,38 +27,94 @@ if args.seed:
     torch.manual_seed(args.seed)
 
 if __name__ == '__main__':
-    train_loader = get_strange_symbol_loader(batch_size=args.batch_size)
 
-    net = Net()
-    optimizer = optim.SGD(net.parameters(), lr=args.learning_rate, momentum=args.momentum)
-    criterion = nn.CrossEntropyLoss()
+    if args.crossvalidate:
+        loaders = get_strange_symbol_cv_loaders(batch_size=args.batch_size, k=args.crossvalidate)
+        avg_train_loss = 0
+        avg_train_acc = 0
+        avg_val_loss = 0
+        avg_val_acc = 0
 
-    for epoch in range(200):
+        figure_id = 0
 
-        avg_loss = 0
-        avg_acc = 0
+        for k, loaders in enumerate(loaders):
+            print('- CV step', k, '-')
+            net = Net()
+            train_loader, val_loader = loaders
+            train_stats, val_stats = train(net, train_loader, val_loader,
+                                           args.lr, args.momentum, patience=args.patience)
 
-        for i, data in enumerate(train_loader):
-            imgs, labels = data  # data is a batch of samples, split into an image tensor and label tensor
+            avg_train_loss += train_stats[0]
+            avg_train_acc += train_stats[1]
+            avg_val_loss += val_stats[0]
+            avg_val_acc += val_stats[1]
 
-            optimizer.zero_grad()  # zero the gradient buffers
+            print('[TRAINING] Final loss', train_stats[0])
+            print('[TRAINING] Final acc', train_stats[1])
+            print('[VALIDATION] Final loss', val_stats[0])
+            print('[VALIDATION] Final acc', val_stats[1])
 
-            # output is a bi dimensional tensor (imgs.shape[0]x15)
-            output = net(imgs)
+            print()
 
-            loss = criterion(output, labels)
-            loss.backward()
+        print('[CROSSVALIDATION - TRAINING] Avg loss for the model is', avg_train_loss / args.crossvalidate)
+        print('[CROSSVALIDATION - TRAINING] Avg acc for the model is', avg_train_acc / args.crossvalidate)
+        print('[CROSSVALIDATION - VALIDATION] Avg loss for the model is', avg_val_loss / args.crossvalidate)
+        print('[CROSSVALIDATION - VALIDATION] Avg acc for the model is', avg_val_acc / args.crossvalidate)
 
-            optimizer.step()  # Does the weight update
+        print()
 
-            avg_loss += loss.item()
+    elif args.holdout:
+        print('- Holdout -')
+        loaders = get_strange_symbol_loader(batch_size=args.batch_size, validation_split=args.holdout)
+        avg_train_loss = 0
+        avg_train_acc = 0
+        avg_val_loss = 0
 
-            predictions = output.argmax(dim=1)
-            avg_acc += (predictions == labels).sum().item()/len(labels)
+        net = Net()
+        train_loader, val_loader = loaders
+        train_stats, val_stats = train(net, train_loader, val_loader,
+                                       args.lr, args.momentum, patience=args.patience)
 
-        print('Avg loss in epoch', epoch, 'is', avg_loss/len(train_loader))
-        print('Avg accuracy in epoch', epoch, 'is', avg_acc / len(train_loader))
-        print('--')
+        print('[TRAINING] Final loss', train_stats[0])
+        print('[TRAINING] Final acc', train_stats[1])
+        print('[VALIDATION] Final loss', val_stats[0])
+        print('[VALIDATION] Final acc', val_stats[1])
+
+        print()
+
+        if args.confusion_matrix:
+            predictions = []
+            labels = []
+
+            for val_data in val_loader:
+                val_imgs, val_labels = val_data
+
+                predictions = predictions + test(net, val_imgs).tolist()
+                labels = labels + val_labels.tolist()
+
+            cm = confusion_matrix(np.array(labels), np.array(predictions))
+
+            print('Confusion matrix: ')
+            print(cm)
+
+        if args.plot:
+            epochs = np.linspace(0, len(train_stats[2]), len(train_stats[2]))
+
+            f1 = plt.figure(0)
+            plt.plot(epochs, train_stats[2], color='coral', label='training')
+            plt.plot(epochs, val_stats[2], color='teal', label='validation')
+            plt.ylabel('loss')
+            plt.xlabel('epochs')
+            plt.legend()
+            plt.title('Loss x epochs')
+
+            f2 = plt.figure(1)
+            plt.plot(epochs, train_stats[3], color='coral', label='training')
+            plt.plot(epochs, val_stats[3], color='teal', label='validation')
+            plt.ylabel('acc')
+            plt.xlabel('epochs')
+            plt.legend()
+            plt.title('Acc x epochs')
 
     # TODO
     # Now it's up to you to define the network and use the data to train it.
@@ -65,3 +129,5 @@ if __name__ == '__main__':
 
     # If you encounter problems during this task, please do not hesitate to ask for help!
     # Please check beforehand if you have installed all necessary packages found in requirements.txt
+
+    plt.show()
