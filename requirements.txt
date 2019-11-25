@@ -1,0 +1,4 @@
+torchvision>0.1.8
+torch>=0.4
+Pillow>=6.0.0
+
