@@ -12,6 +12,7 @@ parser.add_argument('--lr', type=float, default=0.05, help='the learning rate')
 parser.add_argument('--momentum', type=float, default=0.85, help='the momentum')
 parser.add_argument('--patience', type=int, default=5, help='the patience factor for the early stopping')
 parser.add_argument('--batch_size', type=float, default=128, help='the batch size')
+parser.add_argument('--epochs', type=int, default=100, help='maximum number of epochs')
 parser.add_argument('--crossvalidate', type=int,
                     help='whether should the model be validated with crossvalidation k parameter or not')
 parser.add_argument('--holdout', type=float, help='whether should the model be validated with the holdout '
@@ -54,7 +55,7 @@ if __name__ == '__main__':
             train_loader, val_loader = loaders
             train_stats, val_stats = train(net, train_loader, val_loader,
                                            args.lr, args.momentum, patience=args.patience,
-                                           device=device)
+                                           epochs=args.epochs, device=device)
 
             avg_train_loss += train_stats[0]
             avg_train_acc += train_stats[1]
@@ -85,7 +86,8 @@ if __name__ == '__main__':
         net = Net()
         train_loader, val_loader = loaders
         train_stats, val_stats = train(net, train_loader, val_loader,
-                                       args.lr, args.momentum, patience=args.patience)
+                                       args.lr, args.momentum, patience=args.patience,
+                                       epochs=args.epochs)
 
         print('[TRAINING] Final loss', train_stats[0])
         print('[TRAINING] Final acc', train_stats[1])
