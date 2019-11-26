@@ -4,6 +4,12 @@ from datetime import datetime
 
 MSEC_DIR = 'model-select'
 
+#TODO: using a class could be better since logging needs to be global across the functions
+
+def cross_validate_model(model, original_dataset, k, patience):
+	pass
+
+
 def search_best_model(models, original_dataset, k=10, patience=5, logs_dir='./logs'):
 	"""
 	Use Cross-Validation to select the best model from the given ones.
@@ -26,6 +32,21 @@ def search_best_model(models, original_dataset, k=10, patience=5, logs_dir='./lo
 	logging.info("Created model selection directory for this run in {}".format(
 		run_dir))
 
+	for model_name in models:
+		model_dir = os.path.join(run_dir, model_name)
+		os.mkdir(model_dir)
+		logging.info(
+			"Model selection artifacts for {} will be saved to {}".format(
+				model_name, model_dir))
+
+		cross_validate_model(
+			model, original_dataset, k=k, patience=patience)
+
 
 if __name__ == "__main__":
-	search_best_model(None, None)
+	models = {
+		'model1': None,
+		'model2': None
+	}
+
+	search_best_model(models, None)
