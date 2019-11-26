@@ -87,7 +87,7 @@ if __name__ == '__main__':
         train_loader, val_loader = loaders
         train_stats, val_stats = train(net, train_loader, val_loader,
                                        args.lr, args.momentum, patience=args.patience,
-                                       epochs=args.epochs)
+                                       epochs=args.epochs, device=device)
 
         print('[TRAINING] Final loss', train_stats[0])
         print('[TRAINING] Final acc', train_stats[1])
