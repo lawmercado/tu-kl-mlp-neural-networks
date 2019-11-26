@@ -19,12 +19,23 @@ parser.add_argument('--holdout', type=float, help='whether should the model be v
 parser.add_argument('--confusion_matrix', action='store_true', help='whether should the confusion matrix be generated')
 parser.add_argument('--plot', action='store_true', help='whether the results should be plotted')
 parser.add_argument('--seed', type=int, help='the seed to consider in random numbers generation for reproducibility')
+parser.add_argument('--cuda', action='store_true', help='use cuda if available')
 
 args = parser.parse_args()
 
 if args.seed:
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
+    # should make cuda runs deterministic
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+
+device = torch.device("cpu")
+if args.cuda and torch.cuda.is_available():
+    device = torch.device("cuda:0")
+print("Using {} device.".format(device))
+
 
 if __name__ == '__main__':
 
@@ -42,7 +53,8 @@ if __name__ == '__main__':
             net = Net()
             train_loader, val_loader = loaders
             train_stats, val_stats = train(net, train_loader, val_loader,
-                                           args.lr, args.momentum, patience=args.patience)
+                                           args.lr, args.momentum, patience=args.patience,
+                                           device=device)
 
             avg_train_loss += train_stats[0]
             avg_train_acc += train_stats[1]

@@ -3,9 +3,11 @@ from torch import nn
 from torch import optim
 
 
-def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100):
+def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100,
+          device='cpu'):
     optimizer = optim.SGD(net.parameters(), lr=lr, momentum=momentum)
     criterion = nn.CrossEntropyLoss()
+    net = net.to(device)
 
     train_losses = []
     train_accs = []
@@ -29,6 +31,7 @@ def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100):
 
         for i, train_data in enumerate(train_loader):
             imgs, labels = train_data  # data is a batch of samples, split into an image tensor and label tensor
+            imgs, labels = imgs.to(device), labels.to(device)
 
             optimizer.zero_grad()  # zero the gradient buffers
 
@@ -46,6 +49,8 @@ def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100):
         with torch.no_grad():
             for j, val_data in enumerate(val_loader):
                 val_imgs, val_labels = val_data
+                val_imgs, val_labels = val_imgs.to(device), val_labels.to(device)
+                
                 output = net(val_imgs)
                 loss = criterion(output, val_labels)
 
