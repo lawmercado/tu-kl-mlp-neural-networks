@@ -107,7 +107,21 @@ class StrangeSymbols(torch.utils.data.Dataset):
         return fmt_str
 
 
-def get_strange_symbol_loader(batch_size, validation_split=0.1):
+def get_strange_symbol_loader(batch_size):
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+         transforms.Normalize((0.5, ), (0.5, ))]
+    )
+    train_set = StrangeSymbols(train=True, transform=transform)
+
+    train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=2)
+
+    return train_loader
+
+    return train_loader
+
+
+def get_strange_symbol_loader_with_validation(batch_size, validation_split=0.1):
     transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, ), (0.5, ))]
@@ -155,6 +169,6 @@ def get_strange_symbols_test_data():
 
 
 if __name__ == '__main__':
-    trainloader = get_strange_symbol_loader(128)
-    testdata = get_strange_symbols_test_data()
+    loader = get_strange_symbol_loader(128)
+    test_data = get_strange_symbols_test_data()
     print()

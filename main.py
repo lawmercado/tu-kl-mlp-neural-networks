@@ -2,9 +2,10 @@ import argparse
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
-from data.dataset import get_strange_symbol_loader, get_strange_symbol_cv_loaders, get_strange_symbols_test_data
+from data.dataset import get_strange_symbol_loader_with_validation, get_strange_symbol_cv_loaders
+from data.dataset import get_strange_symbols_test_data
 from nn.net1 import Net
-from operations import train, test
+from operations import train, validate, classify
 from sklearn.metrics import confusion_matrix
 
 parser = argparse.ArgumentParser()
@@ -12,6 +13,8 @@ parser.add_argument('--lr', type=float, default=0.05, help='the learning rate')
 parser.add_argument('--momentum', type=float, default=0.85, help='the momentum')
 parser.add_argument('--patience', type=int, default=5, help='the patience factor for the early stopping')
 parser.add_argument('--batch_size', type=float, default=128, help='the batch size')
+parser.add_argument('--epochs', type=float, default=100, help='the epochs to train')
+parser.add_argument('--epslon', type=float, default=0.00001, help='the convergence criteria')
 parser.add_argument('--crossvalidate', type=int,
                     help='whether should the model be validated with crossvalidation k parameter or not')
 parser.add_argument('--holdout', type=float, help='whether should the model be validated with the holdout '
@@ -41,18 +44,18 @@ if __name__ == '__main__':
             print('- CV step', k, '-')
             net = Net()
             train_loader, val_loader = loaders
-            train_stats, val_stats = train(net, train_loader, val_loader,
-                                           args.lr, args.momentum, patience=args.patience)
+            train_stats = train(net, train_loader, args.lr, args.momentum, epochs=args.epochs, epslon=args.epslon)
 
             avg_train_loss += train_stats[0]
             avg_train_acc += train_stats[1]
-            avg_val_loss += val_stats[0]
-            avg_val_acc += val_stats[1]
 
             print('[TRAINING] Final loss', train_stats[0])
             print('[TRAINING] Final acc', train_stats[1])
-            print('[VALIDATION] Final loss', val_stats[0])
-            print('[VALIDATION] Final acc', val_stats[1])
+
+            avg_val_loss, avg_val_acc = validate(net, val_loader)
+
+            print('[VALIDATION] Final loss', avg_val_loss)
+            print('[VALIDATION] Final acc', avg_val_acc)
 
             print()
 
@@ -65,20 +68,22 @@ if __name__ == '__main__':
 
     elif args.holdout:
         print('- Holdout -')
-        loaders = get_strange_symbol_loader(batch_size=args.batch_size, validation_split=args.holdout)
+        loaders = get_strange_symbol_loader_with_validation(batch_size=args.batch_size, validation_split=args.holdout)
         avg_train_loss = 0
         avg_train_acc = 0
         avg_val_loss = 0
 
         net = Net()
         train_loader, val_loader = loaders
-        train_stats, val_stats = train(net, train_loader, val_loader,
-                                       args.lr, args.momentum, patience=args.patience)
+        train_stats = train(net, train_loader, args.lr, args.momentum, epochs=args.epochs, epslon=args.epslon)
 
         print('[TRAINING] Final loss', train_stats[0])
         print('[TRAINING] Final acc', train_stats[1])
-        print('[VALIDATION] Final loss', val_stats[0])
-        print('[VALIDATION] Final acc', val_stats[1])
+
+        avg_val_loss, avg_val_acc = validate(net, val_loader)
+
+        print('[VALIDATION] Final loss', avg_val_loss)
+        print('[VALIDATION] Final acc', avg_val_acc)
 
         print()
 
@@ -89,7 +94,7 @@ if __name__ == '__main__':
             for val_data in val_loader:
                 val_imgs, val_labels = val_data
 
-                predictions = predictions + test(net, val_imgs).tolist()
+                predictions = predictions + classify(net, val_imgs).tolist()
                 labels = labels + val_labels.tolist()
 
             cm = confusion_matrix(np.array(labels), np.array(predictions))
@@ -102,7 +107,6 @@ if __name__ == '__main__':
 
             f1 = plt.figure(0)
             plt.plot(epochs, train_stats[2], color='coral', label='training')
-            plt.plot(epochs, val_stats[2], color='teal', label='validation')
             plt.ylabel('loss')
             plt.xlabel('epochs')
             plt.legend()
@@ -110,7 +114,6 @@ if __name__ == '__main__':
 
             f2 = plt.figure(1)
             plt.plot(epochs, train_stats[3], color='coral', label='training')
-            plt.plot(epochs, val_stats[3], color='teal', label='validation')
             plt.ylabel('acc')
             plt.xlabel('epochs')
             plt.legend()
