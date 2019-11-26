@@ -101,7 +101,8 @@ if __name__ == '__main__':
             for val_data in val_loader:
                 val_imgs, val_labels = val_data
 
-                predictions = predictions + test(net, val_imgs).tolist()
+                predictions = predictions + test(
+                    net, val_imgs, device=device).tolist()
                 labels = labels + val_labels.tolist()
 
             cm = confusion_matrix(np.array(labels), np.array(predictions))

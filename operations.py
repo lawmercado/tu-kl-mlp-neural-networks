@@ -50,7 +50,7 @@ def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100,
             for j, val_data in enumerate(val_loader):
                 val_imgs, val_labels = val_data
                 val_imgs, val_labels = val_imgs.to(device), val_labels.to(device)
-                
+
                 output = net(val_imgs)
                 loss = criterion(output, val_labels)
 
@@ -90,7 +90,10 @@ def train(net, train_loader, val_loader, lr, momentum, patience, epochs=100,
            (smallest_val_loss / len(val_loader), final_val_acc, val_losses, val_accs)
 
 
-def test(net, test_data):
+def test(net, test_data, device='cpu'):
+    net = net.to(device)
+    test_data = test_data.to(device)
+    
     with torch.no_grad():
         output = net(test_data)
         predictions = output.argmax(dim=1)
