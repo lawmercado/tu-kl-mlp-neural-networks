@@ -108,3 +108,5 @@ data/*.pt
 data/*.tar
 .idea
 logs
+data/images
+data/dataset_to_images.py

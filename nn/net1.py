@@ -6,8 +6,8 @@ class Net(nn.Module):
 
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 8, 4)
-        self.conv2 = nn.Conv2d(8, 16, 2)
+        self.conv1 = nn.Conv2d(1, 8, 3)
+        self.conv2 = nn.Conv2d(8, 16, 3)
         self.batchn1 = nn.BatchNorm2d(16)
         self.fc1 = nn.Linear(16 * 5 * 5, 256)  # 5*5 from image dimension after pooling
         self.batchn2 = nn.BatchNorm1d(256)
