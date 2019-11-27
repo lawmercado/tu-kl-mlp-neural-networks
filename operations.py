@@ -6,6 +6,8 @@ import numpy as np
 
 
 def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu'):
+    net.train()
+    
     optimizer = optim.SGD(net.parameters(), lr=lr, momentum=momentum)
     criterion = nn.CrossEntropyLoss()
     net.to(device)
@@ -61,14 +63,19 @@ def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu'):
     return final_train_loss, final_train_acc, train_losses, train_accs
 
 
-def validate(net, val_loader):
+def validate(net, val_loader, device='cpu'):
+    net.eval()
+
     criterion = nn.CrossEntropyLoss()
     avg_val_loss = 0
     avg_val_acc = 0
 
     with torch.no_grad():
+        net = net.to(device)
         for j, val_data in enumerate(val_loader):
             val_imgs, val_labels = val_data
+            val_imgs, val_labels = val_imgs.to(device), val_labels.to(device)
+
             output = net(val_imgs)
             loss = criterion(output, val_labels)
 
