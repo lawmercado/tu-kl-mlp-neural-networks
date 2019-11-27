@@ -157,6 +157,16 @@ def get_strange_symbol_cv_loaders(batch_size, k):
     return cv_loaders
 
 
+def get_strange_symbols_train_dataset():
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+         transforms.Normalize((0.5,), (0.5,))]
+    )
+    train_set = StrangeSymbols(train=True, transform=transform)
+
+    return train_set
+
+
 def get_strange_symbols_test_data():
     transform = transforms.Compose(
         [transforms.ToTensor(),
