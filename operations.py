@@ -1,11 +1,13 @@
+import os
+
 import torch
 from torch import nn
 from torch import optim
 import numpy as np
 
 
-
-def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu'):
+def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu', 
+          checkpoint=None):
     net.train()
     
     optimizer = optim.SGD(net.parameters(), lr=lr, momentum=momentum)
@@ -50,6 +52,16 @@ def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu'):
 
         train_losses.append(final_train_loss)
         train_accs.append(final_train_acc)
+
+        # always keeps net from last epoch
+        if checkpoint != None:
+            curr_name = "{}_epoch{}.pt".format(checkpoint, epoch)
+            old_name = "{}_epoch{}.pt".format(checkpoint, epoch-1)
+            torch.save(
+                net.state_dict(), curr_name)
+
+            if os.path.exists(old_name):
+                os.remove(old_name)
 
         if np.absolute(previous_error - final_train_loss) <= epslon:
             print('[TRAINING] Convergence criteria reached... Stopping training.')

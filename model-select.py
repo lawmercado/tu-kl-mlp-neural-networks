@@ -1,4 +1,5 @@
 import os
+import csv
 import logging
 from datetime import datetime
 
@@ -7,19 +8,19 @@ import numpy as np
 
 import nn.net1
 import nn.net2
+from nn.models import LeNet5_15
 from data.cv_dataset import get_cv_datasets, cv_datasets_to_dataloaders
 from data.dataset import get_strange_symbols_train_dataset
 from operations import train, validate, classify
 
 
 # hardcoded for now
-# some will need to be part of cv somehow
 BATCH_SIZE = 128
-device = 'cpu'
+device = 'cuda'
 lr = 0.05
 momentum = 0.85
 epslon = 0.00001
-epochs = 10
+epochs = 20
 
 class ModelSelect:
     MSEC_DIR = 'model-select'
@@ -69,31 +70,44 @@ class ModelSelect:
         avg_val_loss = 0
         avg_val_acc = 0
         
-        logging.info("Starting Cross-Validation in {}.".format(model_dir))
-        for ki, (train_loader, val_loader) in enumerate(loaders, 0):
-            logging.info("Cross-Validation k {}".format(ki))
+        with open(os.path.join(model_dir, "cv.txt"), 'w') as val_file:
+            logging.info("Starting Cross-Validation in {}.".format(model_dir))
+            
+            for ki, (train_loader, val_loader) in enumerate(loaders, 0):
+                logging.info("Cross-Validation k {}".format(ki))
 
-            model.load_state_dict(torch.load(model_init_params_path))
+                model.load_state_dict(torch.load(model_init_params_path))
 
-            train_stats = train(
-                model, train_loader, lr, momentum, 
-                epochs=epochs, epslon=epslon,
-                device=device)
+                checkpoint = os.path.join(model_dir, "checkpoint_k{}".format(ki))
+                train_stats = train(
+                    model, train_loader, lr, momentum, epochs=epochs, 
+                    epslon=epslon, device=device, checkpoint=checkpoint)
 
-            avg_train_loss += train_stats[0]
-            avg_train_acc += train_stats[1]
+                train_losses, train_accs = train_stats[2:]
+                log_train(train_losses, train_accs, 
+                          os.path.join(model_dir, "stats_k{}.csv".format(ki)))            
 
-            val_loss, val_acc = validate(model, val_loader, device=device)
-            avg_val_loss += val_loss
-            avg_val_acc += val_acc
+                avg_train_loss += train_stats[0]
+                avg_train_acc += train_stats[1]
 
-            print('[TRAINING] Final loss', train_stats[0])
-            print('[TRAINING] Final acc', train_stats[1])
+                val_loss, val_acc = validate(model, val_loader, device=device)
+                avg_val_loss += val_loss
+                avg_val_acc += val_acc
 
-            print('[VALIDATION] Final loss', val_loss)
-            print('[VALIDATION] Final acc', val_acc)
+                val_file.write("k {} val_loss {} val_acc {}\n".format(
+                    ki, val_loss, val_acc))
 
-            print()
+                print('[TRAINING] Final loss', train_stats[0])
+                print('[TRAINING] Final acc', train_stats[1])
+
+                print('[VALIDATION] Final loss', val_loss)
+                print('[VALIDATION] Final acc', val_acc)
+
+                print()
+
+            val_file.write(
+                "avg_train_loss {} avg_train_acc {} avg_val_loss {} avg_val_acc {}".format(
+                    avg_train_loss/k, avg_train_acc/k, avg_val_loss/k, avg_val_acc/k))
 
         print('[CROSSVALIDATION - TRAINING] Avg loss for the model is', avg_train_loss / k)
         print('[CROSSVALIDATION - TRAINING] Avg acc for the model is', avg_train_acc / k)
@@ -121,6 +135,20 @@ class ModelSelect:
                 model_dir=model_dir)
 
 
+def log_train(train_losses, train_accs, path):
+    fieldnames = ['epoch', 'train loss', 'train acc']
+    with open(path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for epoch, stats in enumerate(zip(train_losses, train_accs), 0):
+            writer.writerow({
+                    'epoch': epoch,
+                    'train loss': stats[0],
+                    'train acc': stats[1]
+                })
+
+
 if __name__ == "__main__":
     np.random.seed(0)
     torch.manual_seed(0)
@@ -128,8 +156,10 @@ if __name__ == "__main__":
     torch.backends.cudnn.benchmark = False
 
     models = {
-        'model1': nn.net1.Net(),
-        'model2': nn.net2.Net()
+        'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
+        'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
+        'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
+        'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
     }
     
     ds = get_strange_symbols_train_dataset()
