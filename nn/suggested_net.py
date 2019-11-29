@@ -2,14 +2,14 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class SuggestedNet(nn.Module):
+class Net(nn.Module):
     """
     The neural network suggested in the assignment
 
     """
 
     def __init__(self):
-        super(SuggestedNet, self).__init__()
+        super(Net, self).__init__()
         self.fc1 = nn.Linear(784, 512)
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 15)
@@ -19,7 +19,6 @@ class SuggestedNet(nn.Module):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
-        x = F.softmax(x, dim=1)
         return x
 
     def num_flat_features(self, x):

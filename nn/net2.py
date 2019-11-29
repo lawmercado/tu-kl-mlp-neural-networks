@@ -7,14 +7,18 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1, 6, 2)
-        self.conv2 = nn.Conv2d(6, 12, 2)
-        self.conv3 = nn.Conv2d(12, 24, 2)
+        self.conv2 = nn.Conv2d(6, 16, 2)
+        self.conv3 = nn.Conv2d(16, 24, 2)
         self.batchn1 = nn.BatchNorm2d(24)
-        self.fc1 = nn.Linear(24 * 2 * 2, 64)  # 2*2 from image dimension after pooling
-        self.batchn2 = nn.BatchNorm1d(64)
-        self.fc2 = nn.Linear(64, 32)
-        self.batchn3 = nn.BatchNorm1d(32)
-        self.fc3 = nn.Linear(32, 15)
+        self.fc1 = nn.Linear(24 * 2 * 2, 84)  # 2*2 from image dimension after pooling
+        self.batchn2 = nn.BatchNorm1d(84)
+        self.fc2 = nn.Linear(84, 64)
+        self.batchn3 = nn.BatchNorm1d(64)
+        self.fc3 = nn.Linear(64, 44)
+        self.batchn4 = nn.BatchNorm1d(44)
+        self.fc4 = nn.Linear(44, 24)
+        self.batchn5 = nn.BatchNorm1d(24)
+        self.fc5 = nn.Linear(24, 15)
 
     def forward(self, x):
         # Convolution layers
@@ -44,7 +48,14 @@ class Net(nn.Module):
         x = F.relu(x)
 
         x = self.fc3(x)
-        x = F.softmax(x, dim=1)
+        x = self.batchn4(x)
+        x = F.relu(x)
+
+        x = self.fc4(x)
+        x = self.batchn5(x)
+        x = F.relu(x)
+
+        x = self.fc5(x)
 
         return x
 
