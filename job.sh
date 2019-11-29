@@ -5,7 +5,7 @@
 #SBATCH -o job-%j.out
 #SBATCH -e job-%j.err
 #SBATCH --gres=gpu:1
-#SBATCH -t 87
+#SBATCH -t 300
 
 echo "Executing on $HOSTNAME"
 
