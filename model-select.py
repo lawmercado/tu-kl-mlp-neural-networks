@@ -8,7 +8,7 @@ import numpy as np
 
 import nn.net1
 import nn.net2
-from nn.models import LeNet5_15
+from nn.models import LeNet5_15, NetSuggested, Linear
 from data.cv_dataset import get_cv_datasets, cv_datasets_to_dataloaders
 from data.dataset import get_strange_symbols_train_dataset
 from operations import train, validate, classify
@@ -19,8 +19,8 @@ BATCH_SIZE = 128
 device = 'cuda'
 lr = 0.05
 momentum = 0.85
-epslon = 0.00001
-epochs = 20
+epslon = 1e-4
+epochs = 100
 
 class ModelSelect:
     MSEC_DIR = 'model-select'
@@ -155,14 +155,26 @@ if __name__ == "__main__":
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
+    # models = {
+    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
+    #     'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
+    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
+    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
+    # }
+
     models = {
         'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
         'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
         'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
-        'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
+        'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True),
+        'net': NetSuggested(use_dropout=False, use_batchnorm=False),
+        'net_dropout': NetSuggested(use_dropout=True, use_batchnorm=False),
+        'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
+        'net_bn_dropout': NetSuggested(use_dropout=True, use_batchnorm=True),
+        'linear': Linear()
     }
-    
+
     ds = get_strange_symbols_train_dataset()
 
     model_select = ModelSelect(models, ds)
-    model_select.search_best_model(k=5, patience=5)
+    model_select.search_best_model(k=10, patience=5)
