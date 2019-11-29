@@ -8,10 +8,10 @@ class LeNet5_15(nn.Module):
         self.use_dropout = use_dropout
         self.use_batchnorm = use_batchnorm
 
-        self.conv1 = nn.Conv2d(1, 6, 5)
+        self.conv1 = nn.Conv2d(1, 6, 5, padding=2)
         self.pool = nn.MaxPool2d(2, 2)
         self.conv2 = nn.Conv2d(6, 16, 5)
-        self.fc1 = nn.Linear(16 * 4 * 4, 120)
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 15)
 
@@ -33,7 +33,7 @@ class LeNet5_15(nn.Module):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(self.batchn1(F.relu(self.conv2(x))))
 
-        x = self.dropout(x.view(-1, 16 * 4 * 4))
+        x = self.dropout(x.view(-1, 16 * 5 * 5))
 
         x = self.dropout(self.batchn2(F.relu(self.fc1(x))))
         x = F.relu(self.batchn3(self.fc2(x)))
