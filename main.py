@@ -137,14 +137,8 @@ if __name__ == '__main__':
 
             indexes = np.argsort(np.array(certainties))
 
-<<<<<<< HEAD
-
-                predictions = predictions + classify(net, val_imgs).tolist()
-                labels = labels + val_labels.tolist()
-=======
             top_10 = indexes[-10:]
             bottom_10 = indexes[:10]
->>>>>>> master
 
             top_10_imgs = imgs[top_10[0]].squeeze(0).numpy()
             bottom_10_imgs = imgs[bottom_10[0]].squeeze(0).numpy()
