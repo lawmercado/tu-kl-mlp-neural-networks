@@ -80,7 +80,7 @@ class NetSuggested(nn.Module):
 class Linear(nn.Module):
     def __init__(self):
         super(Linear, self).__init__()
-        self.fc == nn.Linear(784, 15)
+        self.fc = nn.Linear(784, 15)
 
     def forward(self, x):
         x = x.view(-1, self.num_flat_features(x))

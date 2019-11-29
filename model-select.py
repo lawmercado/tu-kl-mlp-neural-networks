@@ -19,7 +19,7 @@ BATCH_SIZE = 128
 device = 'cuda'
 lr = 0.05
 momentum = 0.85
-epslon = 1e-4
+epslon = 1e-5
 epochs = 100
 
 class ModelSelect:
