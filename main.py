@@ -1,25 +1,28 @@
 import argparse
 import torch
+from torch.nn.functional import softmax
 import numpy as np
 import matplotlib.pyplot as plt
 from data.dataset import get_strange_symbol_loader_with_validation, get_strange_symbol_cv_loaders
 from data.dataset import get_strange_symbols_test_data
 from nn.net1 import Net
-from operations import train, validate, classify
+from operations import train, validate, test
 from sklearn.metrics import confusion_matrix
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--lr', type=float, default=0.05, help='the learning rate')
 parser.add_argument('--momentum', type=float, default=0.85, help='the momentum')
 parser.add_argument('--patience', type=int, default=5, help='the patience factor for the early stopping')
-parser.add_argument('--batch_size', type=float, default=128, help='the batch size')
+parser.add_argument('--batch_size', type=int, default=128, help='the batch size')
 parser.add_argument('--epochs', type=float, default=100, help='the epochs to train')
-parser.add_argument('--epslon', type=float, default=0.00001, help='the convergence criteria')
+parser.add_argument('--epslon', type=float, default=0.001, help='the convergence criteria')
 parser.add_argument('--crossvalidate', type=int,
                     help='whether should the model be validated with crossvalidation k parameter or not')
 parser.add_argument('--holdout', type=float, help='whether should the model be validated with the holdout '
                                                   '(with percentage for the validation) method or not')
 parser.add_argument('--confusion_matrix', action='store_true', help='whether should the confusion matrix be generated')
+parser.add_argument('--tops_and_bottoms', action='store_true', help='whether should be presented the tops and bottom'
+                                                                    ' classifications')
 parser.add_argument('--plot', action='store_true', help='whether the results should be plotted')
 parser.add_argument('--seed', type=int, help='the seed to consider in random numbers generation for reproducibility')
 parser.add_argument('--cuda', action='store_true', help='use cuda if available')
@@ -66,10 +69,13 @@ if __name__ == '__main__':
             print('[TRAINING] Final loss', train_stats[0])
             print('[TRAINING] Final acc', train_stats[1])
 
-            avg_val_loss, avg_val_acc = validate(net, val_loader)
+            val_stats = validate(net, val_loader)
 
-            print('[VALIDATION] Final loss', avg_val_loss)
-            print('[VALIDATION] Final acc', avg_val_acc)
+            avg_val_loss += val_stats[0]
+            avg_val_acc += val_stats[1]
+
+            print('[VALIDATION] Final loss', val_stats[0])
+            print('[VALIDATION] Final acc', val_stats[1])
 
             print()
 
@@ -104,17 +110,62 @@ if __name__ == '__main__':
 
         print()
 
-        if args.confusion_matrix:
-            predictions = []
-            labels = []
+        predictions = []
+        labels = []
+        image_tensors = []
+        output_tensors = []
 
-            for val_data in val_loader:
-                val_imgs, val_labels = val_data
+        for val_data in val_loader:
+            val_imgs, val_labels = val_data
 
+            output = test(net, val_imgs)
+            prediction = output.argmax(dim=1)
+
+            output_tensors.append(softmax(output, dim=1))
+            image_tensors.append(val_imgs)
+            predictions = predictions + prediction.tolist()
+            labels = labels + val_labels.tolist()
+
+        if args.tops_and_bottoms:
+            outputs = torch.cat(output_tensors, dim=0)
+            imgs = torch.cat(image_tensors, dim=0)
+
+            certainties = []
+
+            for i in range(len(imgs)):
+                certainties.append(outputs[i][labels[i]].item())
+
+            indexes = np.argsort(np.array(certainties))
+
+<<<<<<< HEAD
 
                 predictions = predictions + classify(net, val_imgs).tolist()
                 labels = labels + val_labels.tolist()
+=======
+            top_10 = indexes[-10:]
+            bottom_10 = indexes[:10]
+>>>>>>> master
 
+            top_10_imgs = imgs[top_10[0]].squeeze(0).numpy()
+            bottom_10_imgs = imgs[bottom_10[0]].squeeze(0).numpy()
+
+            for i in range(1, len(top_10)):
+                top_img = imgs[top_10[i]].squeeze(0).numpy()
+                top_10_imgs = np.hstack((top_10_imgs, top_img))
+                bottom_img = imgs[bottom_10[i]].squeeze(0).numpy()
+                bottom_10_imgs = np.hstack((bottom_10_imgs, bottom_img))
+
+            plt.imsave('plots/top_imgs.png', top_10_imgs, cmap='Greys')
+
+            print('Generated top 10 certainties images')
+            print('Certainties:', [certainties[i] for i in top_10])
+
+            plt.imsave('plots/bottom_imgs.png', bottom_10_imgs, cmap='Greys')
+
+            print('Generated bottom 10 certainties images')
+            print('Certainties:', [certainties[i] for i in bottom_10])
+
+        if args.confusion_matrix:
             cm = confusion_matrix(np.array(labels), np.array(predictions))
 
             print('Confusion matrix: ')
@@ -123,14 +174,14 @@ if __name__ == '__main__':
         if args.plot:
             epochs = np.linspace(0, len(train_stats[2]), len(train_stats[2]))
 
-            f1 = plt.figure(0)
+            f1 = plt.figure(2)
             plt.plot(epochs, train_stats[2], color='coral', label='training')
             plt.ylabel('loss')
             plt.xlabel('epochs')
             plt.legend()
             plt.title('Loss x epochs')
 
-            f2 = plt.figure(1)
+            f2 = plt.figure(3)
             plt.plot(epochs, train_stats[3], color='coral', label='training')
             plt.ylabel('acc')
             plt.xlabel('epochs')

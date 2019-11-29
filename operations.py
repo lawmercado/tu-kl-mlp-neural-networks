@@ -31,7 +31,6 @@ def train(net, train_loader, lr, momentum, epochs, epslon, device='cpu'):
             
             optimizer.zero_grad()  # zero the gradient buffers
 
-            # output is a bi dimensional tensor (imgs.shape[0]x15)
             output = net(imgs)
             loss = criterion(output, labels)
             loss.backward()

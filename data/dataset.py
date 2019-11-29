@@ -118,8 +118,6 @@ def get_strange_symbol_loader(batch_size):
 
     return train_loader
 
-    return train_loader
-
 
 def get_strange_symbol_loader_with_validation(batch_size, validation_split=0.1):
     transform = transforms.Compose(
