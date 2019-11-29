@@ -111,3 +111,7 @@ logs
 data/images
 data/dataset_to_images.py
 plots
+
+# elwe
+*.out
+*.err
