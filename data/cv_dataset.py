@@ -69,11 +69,13 @@ def get_cv_datasets(ds, k):
     return dss
 
 
-def cv_datasets_to_dataloaders(cv_dss, batchsize, workers):
+def cv_datasets_to_dataloaders(cv_dss, batchsize, workers, shuffle_train=True):
     dls = []
     for tset, vset in cv_dss:
-        tload = DataLoader(tset, batch_size=batchsize, shuffle=True, num_workers=workers)
-        vload = DataLoader(vset, batch_size=batchsize, shuffle=False, num_workers=workers)
+        tload = DataLoader(tset, batch_size=batchsize, shuffle=shuffle_train,
+                           num_workers=workers)
+        vload = DataLoader(vset, batch_size=batchsize, shuffle=False, 
+                           num_workers=workers)
         dls.append((tload, vload))
 
     return dls

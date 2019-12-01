@@ -16,7 +16,7 @@ from operations import train, validate, classify
 
 # hardcoded for now
 BATCH_SIZE = 128
-device = 'cuda'
+device = 'cpu'
 lr = 0.05
 momentum = 0.85
 epslon = 1e-5
@@ -116,6 +116,42 @@ class ModelSelect:
 
         print()
 
+    def test(self):
+        """
+        Check whether cross validation is correctly using the same datasets
+        across multiple loadings.
+        """
+        k = 5
+        ms = 3
+
+        all_loaders = []
+        for m in range(ms):
+            cv_dss = get_cv_datasets(self.original_dataset, k)
+            loaders = cv_datasets_to_dataloaders(cv_dss, BATCH_SIZE, 0, shuffle_train=False)
+
+            all_loaders.append(loaders)
+
+        for m1 in range(ms):
+            for m2 in range(m1+1, ms):
+                for ki in range(k):
+                    print("m1 {} m2 {} ki {}".format(m1, m2, ki))
+                    m1_tdl, m1_vdl = all_loaders[m1][0]
+                    m2_tdl, m2_vdl = all_loaders[m2][0]
+
+                    for data1, data2 in zip(m1_tdl, m2_tdl):
+                        imgs1, labels1 = data1
+                        imgs2, labels2 = data2
+
+                        same_imgs = torch.all(torch.eq(imgs1, imgs2))
+                        same_labels = torch.all(torch.eq(labels1, labels2))
+                        
+                        if not same_imgs or not same_labels:
+                            print("There is a difference in the datasets.")
+                            print("m1 {} m2 {} ki {}".format(m1, m2, ki))
+                            raise Exception("Data is different.")
+
+        print("Things are as they should be.")
+        return True
 
     def search_best_model(self, k=10, patience=5):
         """
@@ -177,4 +213,6 @@ if __name__ == "__main__":
     ds = get_strange_symbols_train_dataset()
 
     model_select = ModelSelect(models, ds)
-    model_select.search_best_model(k=10, patience=5)
+    model_select.test()
+
+    # model_select.search_best_model(k=10, patience=5)
