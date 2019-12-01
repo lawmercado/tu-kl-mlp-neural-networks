@@ -138,7 +138,7 @@ def comparison_models_loss(models_folder):
 
 if __name__ == "__main__":
     # python3 model-select.py should be run first to create the folder
-    path = "./logs/model-select/models_k5"
+    path = "./models_k5"
 
     comparison_models_acc(path)
     comparison_models_loss(path)
