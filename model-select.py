@@ -17,7 +17,7 @@ from operations import train, validate, classify
 
 # hardcoded for now
 BATCH_SIZE = 128
-device = 'cuda'
+device = 'cpu'
 lr = 0.05
 momentum = 0.85
 epslon = 1e-5
@@ -161,7 +161,6 @@ class ModelSelect:
         """
         Use Cross-Validation to select the best model from the given ones.
 
-
         """
         for model_name in self.models:
             model_dir = os.path.join(self.run_dir, model_name)
@@ -195,45 +194,21 @@ if __name__ == "__main__":
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-    # models = {
-    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
-    #     'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
-    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
-    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
-    # }
-
-    # models = {
-    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
-    #     'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
-    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
-    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True),
-    #     'net': NetSuggested(use_dropout=False, use_batchnorm=False),
-    #     'net_dropout': NetSuggested(use_dropout=True, use_batchnorm=False),
-    #     'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
-    #     'net_bn_dropout': NetSuggested(use_dropout=True, use_batchnorm=True),
-    #     'linear': Linear()
-    # }
-
-    # models = {
-    #     # 'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False)
-    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
-    # }
-
     models = {
-        'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True)
+        'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
+        'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
+        'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
+        'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True),
+        'net': NetSuggested(use_dropout=False, use_batchnorm=False),
+        'net_dropout': NetSuggested(use_dropout=True, use_batchnorm=False),
+        'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
+        'net_bn_dropout': NetSuggested(use_dropout=True, use_batchnorm=True),
+        'linear': Linear()
     }
-
-    # models = {
-    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
-    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
-    #     'net': NetSuggested(use_dropout=False, use_batchnorm=False),
-    #     'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
-    #     'linear': Linear()
-    # }
 
     ds = get_strange_symbols_train_dataset()
 
-    model_select = ModelSelect(models, ds, dir_name='gpu_net_bn_k5')
+    model_select = ModelSelect(models, ds, dir_name='models_k5')
     model_select.search_best_model(k=5, patience=5)
 
 

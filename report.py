@@ -84,7 +84,6 @@ class Report:
         do_means = [0,0]
         bn_do_means = [0,0]
 
-
         if stat == 'acc':
             ylabel = 'Accuracy'
             ylim = [0.7, 1.0]
@@ -125,56 +124,20 @@ class Report:
                 else:
                     pure_means[idx] = m.vloss
 
-        elif stat == 'epochs':
-            ylabel = 'Epochs for Convergence'
-            ylim = [0, 100]
-            for m in results:
-                if 'bn' in m.model_name and 'dropout' in m.model_name:
-                    bn_do_means.append(m.epochs)
-                elif 'bn' in m.model_name:
-                    bn_means.append(m.epochs)
-                elif 'dropout' in m.model_name:
-                    do_means.append(m.epochs)
-                else:
-                    pure_means.append(m.epochs)
-
-
         fig, ax = plt.subplots()
         rects1 = ax.bar(x_pure, pure_means, width, label='Pure')
         rects2 = ax.bar(x_bn, bn_means, width, label='BN')
         rects3 = ax.bar(x_do, do_means, width, label='Dropout')
         rects4 = ax.bar(x_bn_do, bn_do_means, width, label='BN + Dropout')
         
-        # rects2 = ax.bar(x + width/2, women_means, width, label='Women')
         ax.set_ylabel(ylabel)
         ax.set_xticks([0,1,2])
         ax.set_xticklabels(labels)
         ax.set_ylim(ylim)
-        ax.grid()
         ax.legend()
 
         fig.tight_layout()
         plt.show()
-
-
-def test_cv_avg():
-    path_dir = ("/home/vaitses/Desktop/tmp/"
-                "tu-kl-mlp-neural-networks/"
-                "logs/model-select/models/lenet5")
-
-    report = Report()
-
-    tloss, tacc, vloss, vacc = report.get_model_cv_avg(path_dir)
-    print(tloss, tacc, vloss, vacc)
-
-
-def test_models_data():
-    path_dir = ("/home/vaitses/Desktop/tmp/"
-                "tu-kl-mlp-neural-networks/"
-                "logs/model-select/models")
-
-    report = Report()
-    report.get_models_cv_avgs(path_dir)
 
 
 def comparison_models_acc(models_folder):
@@ -187,17 +150,12 @@ def comparison_models_loss(models_folder):
     report.plot_cv_data(models_folder, stat='loss', k=5)
 
 
-def comparison_models_epochs(models_folder):
-    report = Report()
-    report.plot_cv_data(models_folder, stat='epochs', k=5)
-
-
 if __name__ == "__main__":
-    path = ("/home/vaitses/Desktop/tmp/"
-            "tu-kl-mlp-neural-networks/"
-            "logs/model-select/models_k5")
+    # python3 model-select.py should be run first to create the folder
+    path = "./logs/model-select/models_k5"
 
     comparison_models_acc(path)
+    comparison_models_loss(path)
 
 
 
