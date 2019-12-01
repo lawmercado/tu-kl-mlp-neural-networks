@@ -63,12 +63,13 @@ class Report:
         x_do = [0.1, 1.1]
         x_bn_do = [0.3, 1.3]
 
+        pure_means = []
+        bn_means = []
+        do_means = []
+        bn_do_means = []
         if stat == 'acc':
-            pure_means = []
-            bn_means = []
-            do_means = []
-            bn_do_means = []
-
+            ylabel = 'Accuracy'
+            ylim = [0.7, 11]
             for m in results:
                 if 'bn' in m.model_name and 'dropout' in m.model_name:
                     bn_do_means.append(m.vacc)
@@ -78,6 +79,18 @@ class Report:
                     do_means.append(m.vacc)
                 else:
                     pure_means.append(m.vacc)
+        elif stat == 'loss':
+            ylabel = 'Loss'
+            ylim = [0.0, 1]
+            for m in results:
+                if 'bn' in m.model_name and 'dropout' in m.model_name:
+                    bn_do_means.append(m.vloss)
+                elif 'bn' in m.model_name:
+                    bn_means.append(m.vloss)
+                elif 'dropout' in m.model_name:
+                    do_means.append(m.vloss)
+                else:
+                    pure_means.append(m.vloss)
 
         fig, ax = plt.subplots()
         rects1 = ax.bar(x_pure, pure_means, width, label='Pure')
@@ -86,10 +99,10 @@ class Report:
         rects4 = ax.bar(x_bn_do, bn_do_means, width, label='BN + Dropout')
         
         # rects2 = ax.bar(x + width/2, women_means, width, label='Women')
-        ax.set_ylabel('Accuracy')
+        ax.set_ylabel(ylabel)
         ax.set_xticks([0,1,2])
         ax.set_xticklabels(labels)
-        ax.set_ylim([0.7, 1])
+        ax.set_ylim(ylim)
         ax.legend()
 
         fig.tight_layout()
@@ -120,13 +133,17 @@ def comparison_models_acc(models_folder):
     report = Report()
     report.plot_cv_data(models_folder, stat='acc')
 
+def comparison_models_loss(models_folder):
+    report = Report()
+    report.plot_cv_data(models_folder, stat='loss')
+
 
 if __name__ == "__main__":
     path = ("/home/vaitses/Desktop/tmp/"
             "tu-kl-mlp-neural-networks/"
             "logs/model-select/models")
 
-    comparison_models_acc(path)
+    comparison_models_loss(path)
 
 
 
