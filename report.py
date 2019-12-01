@@ -79,34 +79,52 @@ class Report:
         x_do = [0.1, 1.1]
         x_bn_do = [0.3, 1.3]
 
-        pure_means = []
-        bn_means = []
-        do_means = []
-        bn_do_means = []
+        pure_means = [0,0,0]
+        bn_means = [0,0]
+        do_means = [0,0]
+        bn_do_means = [0,0]
+
+
         if stat == 'acc':
             ylabel = 'Accuracy'
-            ylim = [0.7, 11]
+            ylim = [0.7, 1.0]
             for m in results:
-                if 'bn' in m.model_name and 'dropout' in m.model_name:
-                    bn_do_means.append(m.vacc)
-                elif 'bn' in m.model_name:
-                    bn_means.append(m.vacc)
-                elif 'dropout' in m.model_name:
-                    do_means.append(m.vacc)
+                if 'lenet5' in m.model_name:
+                    idx = 0
+                elif 'net' in m.model_name:
+                    idx = 1
                 else:
-                    pure_means.append(m.vacc)
+                    idx = 2
+
+                if 'bn' in m.model_name and 'dropout' in m.model_name:
+                    bn_do_means[idx] = (m.vacc)
+                elif 'bn' in m.model_name:
+                    bn_means[idx] = m.vacc
+                elif 'dropout' in m.model_name:
+                    do_means[idx] = m.vacc
+                else:
+                    pure_means[idx] = m.vacc
+
         elif stat == 'loss':
             ylabel = 'Loss'
-            ylim = [0.0, 1]
+            ylim = [0.0, 1.75]
             for m in results:
-                if 'bn' in m.model_name and 'dropout' in m.model_name:
-                    bn_do_means.append(m.vloss)
-                elif 'bn' in m.model_name:
-                    bn_means.append(m.vloss)
-                elif 'dropout' in m.model_name:
-                    do_means.append(m.vloss)
+                if 'lenet5' in m.model_name:
+                    idx = 0
+                elif 'net' in m.model_name:
+                    idx = 1
                 else:
-                    pure_means.append(m.vloss)
+                    idx = 2
+
+                if 'bn' in m.model_name and 'dropout' in m.model_name:
+                    bn_do_means[idx] = (m.vloss)
+                elif 'bn' in m.model_name:
+                    bn_means[idx] = m.vloss
+                elif 'dropout' in m.model_name:
+                    do_means[idx] = m.vloss
+                else:
+                    pure_means[idx] = m.vloss
+
         elif stat == 'epochs':
             ylabel = 'Epochs for Convergence'
             ylim = [0, 100]
@@ -132,6 +150,7 @@ class Report:
         ax.set_xticks([0,1,2])
         ax.set_xticklabels(labels)
         ax.set_ylim(ylim)
+        ax.grid()
         ax.legend()
 
         fig.tight_layout()
@@ -160,25 +179,25 @@ def test_models_data():
 
 def comparison_models_acc(models_folder):
     report = Report()
-    report.plot_cv_data(models_folder, stat='acc')
+    report.plot_cv_data(models_folder, stat='acc', k=5)
 
 
 def comparison_models_loss(models_folder):
     report = Report()
-    report.plot_cv_data(models_folder, stat='loss')
+    report.plot_cv_data(models_folder, stat='loss', k=5)
 
 
 def comparison_models_epochs(models_folder):
     report = Report()
-    report.plot_cv_data(models_folder, stat='epochs')
+    report.plot_cv_data(models_folder, stat='epochs', k=5)
 
 
 if __name__ == "__main__":
     path = ("/home/vaitses/Desktop/tmp/"
             "tu-kl-mlp-neural-networks/"
-            "logs/model-select/models")
+            "logs/model-select/models_k5")
 
-    comparison_models_epochs(path)
+    comparison_models_acc(path)
 
 
 

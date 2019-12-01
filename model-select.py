@@ -8,7 +8,8 @@ import numpy as np
 
 import nn.net1
 import nn.net2
-from nn.models import LeNet5_15, NetSuggested, Linear
+from nn.models import LeNet5_15, NetSuggested, Linear, LeNet5_15_Pure, LeNet5_15_BN
+from nn.models import LeNet5_15_Dropout
 from data.cv_dataset import get_cv_datasets, cv_datasets_to_dataloaders
 from data.dataset import get_strange_symbols_train_dataset
 from operations import train, validate, classify
@@ -16,27 +17,27 @@ from operations import train, validate, classify
 
 # hardcoded for now
 BATCH_SIZE = 128
-device = 'cpu'
+device = 'cuda'
 lr = 0.05
 momentum = 0.85
 epslon = 1e-5
-epochs = 100
+epochs = 200
 
 class ModelSelect:
     MSEC_DIR = 'model-select'
     CV_STATS_FILE = 'cv_stats.txt'
     MODEL_FILE_TEMPLATE = 'k{}.pt'
 
-    def __init__(self, models, original_dataset, logs_dir='./logs'):
+    def __init__(self, models, original_dataset, logs_dir='./logs', dir_name=None):
         self.models = models
         self.original_dataset = original_dataset
         self.logs_dir = logs_dir
 
         self.run_dir = None
-        self.initialize_logging_dirs()
+        self.initialize_logging_dirs(dir_name=dir_name)
 
 
-    def initialize_logging_dirs(self):
+    def initialize_logging_dirs(self, dir_name=None):
         logging.basicConfig(level=logging.DEBUG)
 
         # create path to save runs if the dont exist
@@ -47,7 +48,10 @@ class ModelSelect:
                 msec_runs_dir))
 
         # create log directory for this run
-        run_name = datetime.now().strftime('%d_%m_%y__%H_%M_%S')
+        if dir_name:
+            run_name = dir_name
+        else:
+            run_name = datetime.now().strftime('%d_%m_%y__%H_%M_%S')
         run_dir = os.path.join(msec_runs_dir, run_name)
         os.mkdir(run_dir)
         logging.info("Created model selection directory for this run in {}".format(
@@ -198,21 +202,38 @@ if __name__ == "__main__":
     #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
     # }
 
+    # models = {
+    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
+    #     'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
+    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
+    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True),
+    #     'net': NetSuggested(use_dropout=False, use_batchnorm=False),
+    #     'net_dropout': NetSuggested(use_dropout=True, use_batchnorm=False),
+    #     'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
+    #     'net_bn_dropout': NetSuggested(use_dropout=True, use_batchnorm=True),
+    #     'linear': Linear()
+    # }
+
+    # models = {
+    #     # 'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False)
+    #     'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True)
+    # }
+
     models = {
-        'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
-        'lenet5_dropout': LeNet5_15(use_dropout=True, use_batchnorm=False),
-        'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
-        'lenet5_bn_dropout': LeNet5_15(use_dropout=True, use_batchnorm=True),
-        'net': NetSuggested(use_dropout=False, use_batchnorm=False),
-        'net_dropout': NetSuggested(use_dropout=True, use_batchnorm=False),
-        'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
-        'net_bn_dropout': NetSuggested(use_dropout=True, use_batchnorm=True),
-        'linear': Linear()
+        'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True)
     }
+
+    # models = {
+    #     'lenet5': LeNet5_15(use_dropout=False, use_batchnorm=False),
+    #     'lenet5_bn': LeNet5_15(use_dropout=False, use_batchnorm=True),
+    #     'net': NetSuggested(use_dropout=False, use_batchnorm=False),
+    #     'net_bn': NetSuggested(use_dropout=False, use_batchnorm=True),
+    #     'linear': Linear()
+    # }
 
     ds = get_strange_symbols_train_dataset()
 
-    model_select = ModelSelect(models, ds)
-    model_select.test()
+    model_select = ModelSelect(models, ds, dir_name='gpu_net_bn_k5')
+    model_select.search_best_model(k=5, patience=5)
 
-    # model_select.search_best_model(k=10, patience=5)
+
