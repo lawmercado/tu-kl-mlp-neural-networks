@@ -104,7 +104,7 @@ venv.bak/
 .mypy_cache/
 
 data/*.pt
-*.pt
+.tmp_nn.pt
 data/*.tar
 .idea
 data/images

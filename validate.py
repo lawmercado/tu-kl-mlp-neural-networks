@@ -96,8 +96,8 @@ if __name__ == '__main__':
             bottom_img = imgs[bottoms_idx[i]].squeeze(0).numpy()
             bottom_imgs = np.hstack((bottom_imgs, bottom_img))
 
-        plt.imsave('plots/' + args.nn + 'top_imgs.png', top_imgs, cmap='Greys')
-        plt.imsave('plots/' + args.nn + 'bottom_imgs.png', bottom_imgs, cmap='Greys')
+        plt.imsave('plots/' + args.nn + '_top_imgs.png', top_imgs, cmap='Greys')
+        plt.imsave('plots/' + args.nn + '_bottom_imgs.png', bottom_imgs, cmap='Greys')
 
         epochs = np.linspace(0, len(train_stats[2]), len(train_stats[2]))
 

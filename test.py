@@ -26,15 +26,13 @@ if __name__ == '__main__':
 
     output = test(net, test_data, normalize=True)
 
-    print(output.shape)
-
     idx = np.zeros((len(output), 1))
 
     for i in range(1, len(output) + 1):
         idx[i - 1] = i
 
-    np.savetxt('test.csv', np.hstack((idx, output)), delimiter=',')
+    np.savetxt('results.csv', np.hstack((idx, output)), delimiter=',')
 
-    print('[TEST] Saved test set results in \'test.csv\'')
+    print('[TEST] Saved test set results in \'results.csv\'')
 
 

@@ -55,7 +55,7 @@ if __name__ == '__main__':
     print('[VALIDATION] Final loss', val_stats[0])
     print('[VALIDATION] Final acc', val_stats[1])
 
-    torch.save(net, 'nn.pt')
+    torch.save(net, args.nn + '_nn.pt')
 
     print()
 
