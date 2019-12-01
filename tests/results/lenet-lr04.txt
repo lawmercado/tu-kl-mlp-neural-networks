@@ -1,0 +1,1231 @@
+[CROSSVALIDATION] for lenet5 - step 0
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 2.037328730214317
+[TRAINING] Avg accuracy is 0.33778989779874213
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7551406633179143
+[TRAINING] Avg accuracy is 0.761590998427673
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5682305330937764
+[TRAINING] Avg accuracy is 0.8147946147798742
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.49804229809428163
+[TRAINING] Avg accuracy is 0.8382910770440251
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.4593877626477547
+[TRAINING] Avg accuracy is 0.8479461477987421
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.43850738583308346
+[TRAINING] Avg accuracy is 0.8559453616352202
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.40688915128977793
+[TRAINING] Avg accuracy is 0.864878144654088
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.37687309044149686
+[TRAINING] Avg accuracy is 0.8744054638364779
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.373986432293676
+[TRAINING] Avg accuracy is 0.873938679245283
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.36669120037893077
+[TRAINING] Avg accuracy is 0.878871855345912
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.35419158876504536
+[TRAINING] Avg accuracy is 0.8788767688679245
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.34115747095278975
+[TRAINING] Avg accuracy is 0.8882910770440252
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.322483646841544
+[TRAINING] Avg accuracy is 0.8907969732704403
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.3323408914905674
+[TRAINING] Avg accuracy is 0.8883991745283019
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.3139876647377914
+[TRAINING] Avg accuracy is 0.8928508254716981
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.3174971519213802
+[TRAINING] Avg accuracy is 0.8947867531446542
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.3255247070963653
+[TRAINING] Avg accuracy is 0.892875393081761
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.3092594378680553
+[TRAINING] Avg accuracy is 0.8953223270440251
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.30436846557653174
+[TRAINING] Avg accuracy is 0.8968012971698113
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.2999114103193553
+[TRAINING] Avg accuracy is 0.8985701650943396
+
+[TRAINING] Epoch 20
+[TRAINING] Avg loss is 0.30853746831417084
+[TRAINING] Avg accuracy is 0.8944329795597484
+
+[TRAINING] Epoch 21
+[TRAINING] Avg loss is 0.3032893634067391
+[TRAINING] Avg accuracy is 0.898683176100629
+
+[TRAINING] Epoch 22
+[TRAINING] Avg loss is 0.2928184331306871
+[TRAINING] Avg accuracy is 0.9007075471698113
+
+[TRAINING] Epoch 23
+[TRAINING] Avg loss is 0.28310651205620674
+[TRAINING] Avg accuracy is 0.9021373820754718
+
+[TRAINING] Epoch 24
+[TRAINING] Avg loss is 0.27881352294166134
+[TRAINING] Avg accuracy is 0.9059060534591196
+
+[TRAINING] Epoch 25
+[TRAINING] Avg loss is 0.2724513835361544
+[TRAINING] Avg accuracy is 0.905095322327044
+
+[TRAINING] Epoch 26
+[TRAINING] Avg loss is 0.27789694942393395
+[TRAINING] Avg accuracy is 0.9051690251572327
+
+[TRAINING] Epoch 27
+[TRAINING] Avg loss is 0.27844497849637606
+[TRAINING] Avg accuracy is 0.9059060534591196
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.27844497849637606
+[TRAINING] Final acc in this step 0.9059060534591196
+[VALIDATION] Final loss in this step 0.2647431033353011
+[VALIDATION] Final acc in this step 0.9128170289855072
+
+[CROSSVALIDATION] for lenet5 - step 1
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.9947203442735493
+[TRAINING] Avg accuracy is 0.34727299528301886
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7199498448731765
+[TRAINING] Avg accuracy is 0.7700226022012578
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5703536423872102
+[TRAINING] Avg accuracy is 0.816067216981132
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.507977989203525
+[TRAINING] Avg accuracy is 0.8369840801886793
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.45780086882834164
+[TRAINING] Avg accuracy is 0.8547366352201259
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.42570684428484934
+[TRAINING] Avg accuracy is 0.8597189465408804
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.40032647226778967
+[TRAINING] Avg accuracy is 0.8700176886792452
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.3964672153288463
+[TRAINING] Avg accuracy is 0.8695803852201258
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.3784084405820325
+[TRAINING] Avg accuracy is 0.8726464229559749
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.3595212087878641
+[TRAINING] Avg accuracy is 0.8811124213836478
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.3542772213805397
+[TRAINING] Avg accuracy is 0.8820705581761006
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3270288718477735
+[TRAINING] Avg accuracy is 0.8924380896226415
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.32851851998635057
+[TRAINING] Avg accuracy is 0.8885367531446541
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.3173793136792363
+[TRAINING] Avg accuracy is 0.8950078616352202
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.32148985367900923
+[TRAINING] Avg accuracy is 0.8919270833333333
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.314039538913178
+[TRAINING] Avg accuracy is 0.8923791273584906
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.30111454848973257
+[TRAINING] Avg accuracy is 0.8976955581761006
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.3084943761240761
+[TRAINING] Avg accuracy is 0.8991155660377359
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.30180956718494306
+[TRAINING] Avg accuracy is 0.8993170204402515
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.29425190192348555
+[TRAINING] Avg accuracy is 0.898776533018868
+
+[TRAINING] Epoch 20
+[TRAINING] Avg loss is 0.29049927474192855
+[TRAINING] Avg accuracy is 0.9005552279874214
+
+[TRAINING] Epoch 21
+[TRAINING] Avg loss is 0.28161662381212665
+[TRAINING] Avg accuracy is 0.9005797955974844
+
+[TRAINING] Epoch 22
+[TRAINING] Avg loss is 0.2841658784814601
+[TRAINING] Avg accuracy is 0.9012136399371069
+
+[TRAINING] Epoch 23
+[TRAINING] Avg loss is 0.27783643510544076
+[TRAINING] Avg accuracy is 0.9071688286163523
+
+[TRAINING] Epoch 24
+[TRAINING] Avg loss is 0.28205791066558855
+[TRAINING] Avg accuracy is 0.906063286163522
+
+[TRAINING] Epoch 25
+[TRAINING] Avg loss is 0.28735130055333086
+[TRAINING] Avg accuracy is 0.9031397405660376
+
+[TRAINING] Epoch 26
+[TRAINING] Avg loss is 0.27434829988007275
+[TRAINING] Avg accuracy is 0.9083038522012579
+
+[TRAINING] Epoch 27
+[TRAINING] Avg loss is 0.27161576233382495
+[TRAINING] Avg accuracy is 0.907905856918239
+
+[TRAINING] Epoch 28
+[TRAINING] Avg loss is 0.26626970738453687
+[TRAINING] Avg accuracy is 0.9087706367924528
+
+[TRAINING] Epoch 29
+[TRAINING] Avg loss is 0.27274801272828625
+[TRAINING] Avg accuracy is 0.9060534591194969
+
+[TRAINING] Epoch 30
+[TRAINING] Avg loss is 0.2685177629145811
+[TRAINING] Avg accuracy is 0.9109178459119497
+
+[TRAINING] Epoch 31
+[TRAINING] Avg loss is 0.25780134184180564
+[TRAINING] Avg accuracy is 0.9106525157232704
+
+[TRAINING] Epoch 32
+[TRAINING] Avg loss is 0.263341080186502
+[TRAINING] Avg accuracy is 0.9094536163522013
+
+[TRAINING] Epoch 33
+[TRAINING] Avg loss is 0.2592850086402218
+[TRAINING] Avg accuracy is 0.913340212264151
+
+[TRAINING] Epoch 34
+[TRAINING] Avg loss is 0.24319448069019137
+[TRAINING] Avg accuracy is 0.9139298349056604
+
+[TRAINING] Epoch 35
+[TRAINING] Avg loss is 0.24858196803702498
+[TRAINING] Avg accuracy is 0.9155070754716982
+
+[TRAINING] Epoch 36
+[TRAINING] Avg loss is 0.2558457415621236
+[TRAINING] Avg accuracy is 0.9122346698113208
+
+[TRAINING] Epoch 37
+[TRAINING] Avg loss is 0.2531552737895048
+[TRAINING] Avg accuracy is 0.9126326650943396
+
+[TRAINING] Epoch 38
+[TRAINING] Avg loss is 0.2589865686758509
+[TRAINING] Avg accuracy is 0.9161212657232704
+
+[TRAINING] Epoch 39
+[TRAINING] Avg loss is 0.23836253168729116
+[TRAINING] Avg accuracy is 0.9188974056603774
+
+[TRAINING] Epoch 40
+[TRAINING] Avg loss is 0.23563705567481383
+[TRAINING] Avg accuracy is 0.9175314465408806
+
+[TRAINING] Epoch 41
+[TRAINING] Avg loss is 0.2325083389878273
+[TRAINING] Avg accuracy is 0.9212165880503145
+
+[TRAINING] Epoch 42
+[TRAINING] Avg loss is 0.24997115971625977
+[TRAINING] Avg accuracy is 0.9150255503144654
+
+[TRAINING] Epoch 43
+[TRAINING] Avg loss is 0.23825679564813398
+[TRAINING] Avg accuracy is 0.9190349842767296
+
+[TRAINING] Epoch 44
+[TRAINING] Avg loss is 0.24142901761070737
+[TRAINING] Avg accuracy is 0.917595322327044
+
+[TRAINING] Epoch 45
+[TRAINING] Avg loss is 0.22738677818539008
+[TRAINING] Avg accuracy is 0.9202977594339623
+
+[TRAINING] Epoch 46
+[TRAINING] Avg loss is 0.2347712260934542
+[TRAINING] Avg accuracy is 0.9200766509433963
+
+[TRAINING] Epoch 47
+[TRAINING] Avg loss is 0.23452014110560687
+[TRAINING] Avg accuracy is 0.9188482704402515
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.23452014110560687
+[TRAINING] Final acc in this step 0.9188482704402515
+[VALIDATION] Final loss in this step 0.2440421717862288
+[VALIDATION] Final acc in this step 0.9266021286231885
+
+[CROSSVALIDATION] for lenet5 - step 2
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.9002382333548564
+[TRAINING] Avg accuracy is 0.3809207940251572
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.760933222354583
+[TRAINING] Avg accuracy is 0.7554834905660377
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5789558035585115
+[TRAINING] Avg accuracy is 0.809655070754717
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5280573103787765
+[TRAINING] Avg accuracy is 0.8263610455974844
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.46844608210167793
+[TRAINING] Avg accuracy is 0.8448850235849056
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.45412512236046343
+[TRAINING] Avg accuracy is 0.8516018081761005
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.40958418767407256
+[TRAINING] Avg accuracy is 0.8631092767295597
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.4139310745698101
+[TRAINING] Avg accuracy is 0.8618022798742138
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.39254839071687664
+[TRAINING] Avg accuracy is 0.8692659198113208
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.37007775748113414
+[TRAINING] Avg accuracy is 0.8782380110062893
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.36727791012458083
+[TRAINING] Avg accuracy is 0.877717177672956
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3565168342781517
+[TRAINING] Avg accuracy is 0.8784247248427673
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.3384288060215284
+[TRAINING] Avg accuracy is 0.8852496069182391
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.32860303951321906
+[TRAINING] Avg accuracy is 0.8864190251572326
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.32347933399789736
+[TRAINING] Avg accuracy is 0.8928164308176101
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.32069610944896376
+[TRAINING] Avg accuracy is 0.8913227201257862
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.31771909051908637
+[TRAINING] Avg accuracy is 0.8935288915094339
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.3134808370246078
+[TRAINING] Avg accuracy is 0.894344536163522
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.30260497879869536
+[TRAINING] Avg accuracy is 0.8947965801886792
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.3042771630692032
+[TRAINING] Avg accuracy is 0.8958087657232705
+
+[TRAINING] Epoch 20
+[TRAINING] Avg loss is 0.2925529579790133
+[TRAINING] Avg accuracy is 0.9002948113207547
+
+[TRAINING] Epoch 21
+[TRAINING] Avg loss is 0.3019511620953398
+[TRAINING] Avg accuracy is 0.896840605345912
+
+[TRAINING] Epoch 22
+[TRAINING] Avg loss is 0.28365768302442895
+[TRAINING] Avg accuracy is 0.9045253537735849
+
+[TRAINING] Epoch 23
+[TRAINING] Avg loss is 0.30111479857620205
+[TRAINING] Avg accuracy is 0.8997690644654088
+
+[TRAINING] Epoch 24
+[TRAINING] Avg loss is 0.2849436787501821
+[TRAINING] Avg accuracy is 0.9042207154088051
+
+[TRAINING] Epoch 25
+[TRAINING] Avg loss is 0.28098148543317364
+[TRAINING] Avg accuracy is 0.9042649371069184
+
+[TRAINING] Epoch 26
+[TRAINING] Avg loss is 0.2784821890153975
+[TRAINING] Avg accuracy is 0.9064318003144655
+
+[TRAINING] Epoch 27
+[TRAINING] Avg loss is 0.27155095085782827
+[TRAINING] Avg accuracy is 0.9097386006289309
+
+[TRAINING] Epoch 28
+[TRAINING] Avg loss is 0.2810355245645316
+[TRAINING] Avg accuracy is 0.9003046383647799
+
+[TRAINING] Epoch 29
+[TRAINING] Avg loss is 0.27420835942029953
+[TRAINING] Avg accuracy is 0.9069280660377359
+
+[TRAINING] Epoch 30
+[TRAINING] Avg loss is 0.27490983664427165
+[TRAINING] Avg accuracy is 0.9058618317610063
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.27490983664427165
+[TRAINING] Final acc in this step 0.9058618317610063
+[VALIDATION] Final loss in this step 0.2303703067203363
+[VALIDATION] Final acc in this step 0.9286684782608696
+
+[CROSSVALIDATION] for lenet5 - step 3
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.858670693523479
+[TRAINING] Avg accuracy is 0.3937401729559748
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7106695627828814
+[TRAINING] Avg accuracy is 0.7733244889937108
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5461453438367484
+[TRAINING] Avg accuracy is 0.8258254716981132
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.48407170485775425
+[TRAINING] Avg accuracy is 0.8456711871069184
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.44525228890607943
+[TRAINING] Avg accuracy is 0.8561468160377359
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.4138339088772828
+[TRAINING] Avg accuracy is 0.8666224449685535
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.40049934527784026
+[TRAINING] Avg accuracy is 0.8684551886792453
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.38621351699221806
+[TRAINING] Avg accuracy is 0.8732458726415094
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.3697350827871628
+[TRAINING] Avg accuracy is 0.8785623034591196
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.3503757808006035
+[TRAINING] Avg accuracy is 0.8854166666666667
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.3509550727200958
+[TRAINING] Avg accuracy is 0.8862175707547171
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.3509550727200958
+[TRAINING] Final acc in this step 0.8862175707547171
+[VALIDATION] Final loss in this step 0.3046203789611657
+[VALIDATION] Final acc in this step 0.8944463315217391
+
+[CROSSVALIDATION] for lenet5 - step 4
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.8281628303932693
+[TRAINING] Avg accuracy is 0.4026385613207547
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7210987184969884
+[TRAINING] Avg accuracy is 0.769462460691824
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5700458278352359
+[TRAINING] Avg accuracy is 0.8208677279874214
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5295035417349834
+[TRAINING] Avg accuracy is 0.8270685927672956
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.47086816098330153
+[TRAINING] Avg accuracy is 0.8421088836477988
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.4370602495827765
+[TRAINING] Avg accuracy is 0.8557488207547169
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.4230592311272081
+[TRAINING] Avg accuracy is 0.8631387578616353
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.39820791288929164
+[TRAINING] Avg accuracy is 0.8669074292452831
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.3852983249245949
+[TRAINING] Avg accuracy is 0.869939072327044
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.36649160621301186
+[TRAINING] Avg accuracy is 0.878975039308176
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.35823145888324054
+[TRAINING] Avg accuracy is 0.8824783805031446
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3475667898947338
+[TRAINING] Avg accuracy is 0.8835544418238994
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.3409162367571075
+[TRAINING] Avg accuracy is 0.8861045597484276
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.3405411500694617
+[TRAINING] Avg accuracy is 0.885121855345912
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.3405411500694617
+[TRAINING] Final acc in this step 0.885121855345912
+[VALIDATION] Final loss in this step 0.2806907532115777
+[VALIDATION] Final acc in this step 0.9012681159420289
+
+[CROSSVALIDATION] for lenet5 - step 5
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.8676714587886378
+[TRAINING] Avg accuracy is 0.38952437106918236
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7501274026789755
+[TRAINING] Avg accuracy is 0.7573801100628931
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.586892160323431
+[TRAINING] Avg accuracy is 0.8076159591194969
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5259106482537288
+[TRAINING] Avg accuracy is 0.8288374606918238
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.47292958523304957
+[TRAINING] Avg accuracy is 0.8439760220125787
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.4371204899167115
+[TRAINING] Avg accuracy is 0.8552967767295597
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.41071839827411577
+[TRAINING] Avg accuracy is 0.8594880110062892
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.4010522278412333
+[TRAINING] Avg accuracy is 0.8664062499999999
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.37693558984769965
+[TRAINING] Avg accuracy is 0.8761006289308175
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.3793878788655659
+[TRAINING] Avg accuracy is 0.8746462264150944
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.36043467232078874
+[TRAINING] Avg accuracy is 0.8809944968553459
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3507466151748063
+[TRAINING] Avg accuracy is 0.882837067610063
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.35502381172944913
+[TRAINING] Avg accuracy is 0.8784591194968553
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.35243361035607895
+[TRAINING] Avg accuracy is 0.8817315251572327
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.34616291171537256
+[TRAINING] Avg accuracy is 0.8823014937106919
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.32787896046098675
+[TRAINING] Avg accuracy is 0.8897553066037737
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.32681361515566987
+[TRAINING] Avg accuracy is 0.886964426100629
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.3371680686777493
+[TRAINING] Avg accuracy is 0.8892099056603773
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.3233542685519974
+[TRAINING] Avg accuracy is 0.8915978773584906
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.31858843340063997
+[TRAINING] Avg accuracy is 0.8921039701257862
+
+[TRAINING] Epoch 20
+[TRAINING] Avg loss is 0.29199217189595383
+[TRAINING] Avg accuracy is 0.9018818789308176
+
+[TRAINING] Epoch 21
+[TRAINING] Avg loss is 0.2998670682592212
+[TRAINING] Avg accuracy is 0.8991057389937107
+
+[TRAINING] Epoch 22
+[TRAINING] Avg loss is 0.29553439721183955
+[TRAINING] Avg accuracy is 0.8983981918238995
+
+[TRAINING] Epoch 23
+[TRAINING] Avg loss is 0.2988243645654534
+[TRAINING] Avg accuracy is 0.8995823506289308
+
+[TRAINING] Epoch 24
+[TRAINING] Avg loss is 0.2893682489839365
+[TRAINING] Avg accuracy is 0.9008844339622643
+
+[TRAINING] Epoch 25
+[TRAINING] Avg loss is 0.2914467621243225
+[TRAINING] Avg accuracy is 0.899557783018868
+
+[TRAINING] Epoch 26
+[TRAINING] Avg loss is 0.28108409243934557
+[TRAINING] Avg accuracy is 0.9030414701257862
+
+[TRAINING] Epoch 27
+[TRAINING] Avg loss is 0.2847885139427095
+[TRAINING] Avg accuracy is 0.9040438286163522
+
+[TRAINING] Epoch 28
+[TRAINING] Avg loss is 0.27385055646300316
+[TRAINING] Avg accuracy is 0.9051346305031447
+
+[TRAINING] Epoch 29
+[TRAINING] Avg loss is 0.2636222021900258
+[TRAINING] Avg accuracy is 0.9070214229559749
+
+[TRAINING] Epoch 30
+[TRAINING] Avg loss is 0.2843963860903146
+[TRAINING] Avg accuracy is 0.9039602987421383
+
+[TRAINING] Epoch 31
+[TRAINING] Avg loss is 0.27536544723893114
+[TRAINING] Avg accuracy is 0.90609768081761
+
+[TRAINING] Epoch 32
+[TRAINING] Avg loss is 0.281722495437793
+[TRAINING] Avg accuracy is 0.9035279088050315
+
+[TRAINING] Epoch 33
+[TRAINING] Avg loss is 0.2748826999428137
+[TRAINING] Avg accuracy is 0.905527712264151
+
+[TRAINING] Epoch 34
+[TRAINING] Avg loss is 0.27355522036833585
+[TRAINING] Avg accuracy is 0.9051051493710692
+
+[TRAINING] Epoch 35
+[TRAINING] Avg loss is 0.26604781932425947
+[TRAINING] Avg accuracy is 0.9098123034591196
+
+[TRAINING] Epoch 36
+[TRAINING] Avg loss is 0.2724166618624948
+[TRAINING] Avg accuracy is 0.9083185927672957
+
+[TRAINING] Epoch 37
+[TRAINING] Avg loss is 0.2641777855185968
+[TRAINING] Avg accuracy is 0.9102446933962265
+
+[TRAINING] Epoch 38
+[TRAINING] Avg loss is 0.2678180767117806
+[TRAINING] Avg accuracy is 0.9066086871069182
+
+[TRAINING] Epoch 39
+[TRAINING] Avg loss is 0.2611630878077363
+[TRAINING] Avg accuracy is 0.9098516116352201
+
+[TRAINING] Epoch 40
+[TRAINING] Avg loss is 0.2588445021999332
+[TRAINING] Avg accuracy is 0.9097287735849057
+
+[TRAINING] Epoch 41
+[TRAINING] Avg loss is 0.2542814907600295
+[TRAINING] Avg accuracy is 0.9128341194968554
+
+[TRAINING] Epoch 42
+[TRAINING] Avg loss is 0.25741748033829454
+[TRAINING] Avg accuracy is 0.9119939072327043
+
+[TRAINING] Epoch 43
+[TRAINING] Avg loss is 0.26906035362549546
+[TRAINING] Avg accuracy is 0.9113993710691825
+
+[TRAINING] Epoch 44
+[TRAINING] Avg loss is 0.265043668870656
+[TRAINING] Avg accuracy is 0.9103920990566038
+
+[TRAINING] Epoch 45
+[TRAINING] Avg loss is 0.2580581936493235
+[TRAINING] Avg accuracy is 0.9115369496855346
+
+[TRAINING] Epoch 46
+[TRAINING] Avg loss is 0.2588464907317791
+[TRAINING] Avg accuracy is 0.9110750786163523
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.2588464907317791
+[TRAINING] Final acc in this step 0.9110750786163523
+[VALIDATION] Final loss in this step 0.2239266075193882
+[VALIDATION] Final acc in this step 0.9238847373188405
+
+[CROSSVALIDATION] for lenet5 - step 6
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.8966246236045405
+[TRAINING] Avg accuracy is 0.3818199685534592
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7527114186646804
+[TRAINING] Avg accuracy is 0.758967177672956
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5820791561086223
+[TRAINING] Avg accuracy is 0.8119005503144654
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5070441694192167
+[TRAINING] Avg accuracy is 0.833942610062893
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.4696101279191251
+[TRAINING] Avg accuracy is 0.8444919418238994
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.43098794148778014
+[TRAINING] Avg accuracy is 0.8589180424528301
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.4333143442306878
+[TRAINING] Avg accuracy is 0.8570214229559749
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.4067832329925501
+[TRAINING] Avg accuracy is 0.865438286163522
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.38786850321405336
+[TRAINING] Avg accuracy is 0.8753193789308177
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.36448163637575115
+[TRAINING] Avg accuracy is 0.8815202437106918
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.3604807162059928
+[TRAINING] Avg accuracy is 0.8798152515723271
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.35978579746102385
+[TRAINING] Avg accuracy is 0.877692610062893
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.35978579746102385
+[TRAINING] Final acc in this step 0.877692610062893
+[VALIDATION] Final loss in this step 0.29431746527552605
+[VALIDATION] Final acc in this step 0.9024003623188405
+
+[CROSSVALIDATION] for lenet5 - step 7
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.7309088330223876
+[TRAINING] Avg accuracy is 0.44526827830188676
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.6871141195297241
+[TRAINING] Avg accuracy is 0.7863748034591195
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5599192847620766
+[TRAINING] Avg accuracy is 0.82046481918239
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.47857406201227654
+[TRAINING] Avg accuracy is 0.8476120283018868
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.4493968364483905
+[TRAINING] Avg accuracy is 0.8544565644654087
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.4106015331059132
+[TRAINING] Avg accuracy is 0.865192610062893
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.41340397565432313
+[TRAINING] Avg accuracy is 0.864494889937107
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.38258846244722045
+[TRAINING] Avg accuracy is 0.8721108490566037
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.38032894778364107
+[TRAINING] Avg accuracy is 0.8722238600628931
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.36115660040446046
+[TRAINING] Avg accuracy is 0.881647995283019
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.3576444318553187
+[TRAINING] Avg accuracy is 0.8833972091194968
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3534882297774531
+[TRAINING] Avg accuracy is 0.8845518867924529
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.3346151774221996
+[TRAINING] Avg accuracy is 0.8909148977987421
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.33531831233006604
+[TRAINING] Avg accuracy is 0.8876277515723271
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.33531831233006604
+[TRAINING] Final acc in this step 0.8876277515723271
+[VALIDATION] Final loss in this step 0.28498198340336484
+[VALIDATION] Final acc in this step 0.9081465126811595
+
+[CROSSVALIDATION] for lenet5 - step 8
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 2.0127457683941103
+[TRAINING] Avg accuracy is 0.3363748034591195
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.814128929151679
+[TRAINING] Avg accuracy is 0.7361635220125786
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.6000315839389585
+[TRAINING] Avg accuracy is 0.8052329009433962
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5322289627115682
+[TRAINING] Avg accuracy is 0.8273437499999999
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.48265725261760206
+[TRAINING] Avg accuracy is 0.8424380896226416
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.44004379353433287
+[TRAINING] Avg accuracy is 0.8558323506289307
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.43774098678017564
+[TRAINING] Avg accuracy is 0.8571688286163522
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.404802402235427
+[TRAINING] Avg accuracy is 0.8661851415094339
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.38758267012407194
+[TRAINING] Avg accuracy is 0.8726267688679245
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.3890173532209306
+[TRAINING] Avg accuracy is 0.8705925707547171
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.36920191474118325
+[TRAINING] Avg accuracy is 0.8780611242138364
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.35266055560336923
+[TRAINING] Avg accuracy is 0.8797120676100628
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.350612961318133
+[TRAINING] Avg accuracy is 0.8854068396226416
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.35344120016637837
+[TRAINING] Avg accuracy is 0.8802034198113208
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.3295291541319973
+[TRAINING] Avg accuracy is 0.8902220911949685
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.33883254483061015
+[TRAINING] Avg accuracy is 0.8830827437106917
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.3347894441125528
+[TRAINING] Avg accuracy is 0.8881682389937107
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.3197869527030666
+[TRAINING] Avg accuracy is 0.8927034198113208
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.31295775017648375
+[TRAINING] Avg accuracy is 0.8958284198113208
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.3139287451246999
+[TRAINING] Avg accuracy is 0.8932389937106918
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.3139287451246999
+[TRAINING] Final acc in this step 0.8932389937106918
+[VALIDATION] Final loss in this step 0.27196013306578
+[VALIDATION] Final acc in this step 0.9020040760869565
+
+[CROSSVALIDATION] for lenet5 - step 9
+
+LeNet5(
+  (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+  (dropout1): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=400, out_features=120, bias=True)
+  (dropout2): Dropout2d(p=0.2, inplace=False)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=15, bias=True)
+)
+
+[TRAINING] Epoch 0
+[TRAINING] Avg loss is 1.980165311188068
+[TRAINING] Avg accuracy is 0.3482556996855346
+
+[TRAINING] Epoch 1
+[TRAINING] Avg loss is 0.7686270101452773
+[TRAINING] Avg accuracy is 0.7559994103773585
+
+[TRAINING] Epoch 2
+[TRAINING] Avg loss is 0.5860992948401649
+[TRAINING] Avg accuracy is 0.8124852594339622
+
+[TRAINING] Epoch 3
+[TRAINING] Avg loss is 0.5181117979985363
+[TRAINING] Avg accuracy is 0.8322376179245282
+
+[TRAINING] Epoch 4
+[TRAINING] Avg loss is 0.47001836322388557
+[TRAINING] Avg accuracy is 0.8477790880503144
+
+[TRAINING] Epoch 5
+[TRAINING] Avg loss is 0.4511723034786728
+[TRAINING] Avg accuracy is 0.8537686713836478
+
+[TRAINING] Epoch 6
+[TRAINING] Avg loss is 0.42360221636745166
+[TRAINING] Avg accuracy is 0.8625196540880503
+
+[TRAINING] Epoch 7
+[TRAINING] Avg loss is 0.40267347586604785
+[TRAINING] Avg accuracy is 0.8692560927672957
+
+[TRAINING] Epoch 8
+[TRAINING] Avg loss is 0.38862400501966476
+[TRAINING] Avg accuracy is 0.8700766509433963
+
+[TRAINING] Epoch 9
+[TRAINING] Avg loss is 0.37508266995537953
+[TRAINING] Avg accuracy is 0.8761743317610062
+
+[TRAINING] Epoch 10
+[TRAINING] Avg loss is 0.3700670972466469
+[TRAINING] Avg accuracy is 0.8763020833333333
+
+[TRAINING] Epoch 11
+[TRAINING] Avg loss is 0.3553240195197879
+[TRAINING] Avg accuracy is 0.8818150550314465
+
+[TRAINING] Epoch 12
+[TRAINING] Avg loss is 0.34387209027443294
+[TRAINING] Avg accuracy is 0.8872494103773585
+
+[TRAINING] Epoch 13
+[TRAINING] Avg loss is 0.3405878023718888
+[TRAINING] Avg accuracy is 0.8853871855345912
+
+[TRAINING] Epoch 14
+[TRAINING] Avg loss is 0.3233811381571698
+[TRAINING] Avg accuracy is 0.8928409984276731
+
+[TRAINING] Epoch 15
+[TRAINING] Avg loss is 0.3426643740737213
+[TRAINING] Avg accuracy is 0.8868808962264152
+
+[TRAINING] Epoch 16
+[TRAINING] Avg loss is 0.32940381301461524
+[TRAINING] Avg accuracy is 0.8916371855345913
+
+[TRAINING] Epoch 17
+[TRAINING] Avg loss is 0.31003047666459715
+[TRAINING] Avg accuracy is 0.8967374213836478
+
+[TRAINING] Epoch 18
+[TRAINING] Avg loss is 0.3150040698501299
+[TRAINING] Avg accuracy is 0.8959905660377357
+
+[TRAINING] Epoch 19
+[TRAINING] Avg loss is 0.3175835951038127
+[TRAINING] Avg accuracy is 0.8928950471698113
+
+[TRAINING] Epoch 20
+[TRAINING] Avg loss is 0.303250447126492
+[TRAINING] Avg accuracy is 0.8988305817610064
+
+[TRAINING] Epoch 21
+[TRAINING] Avg loss is 0.297989769083149
+[TRAINING] Avg accuracy is 0.8994202044025158
+
+[TRAINING] Epoch 22
+[TRAINING] Avg loss is 0.30535793951097523
+[TRAINING] Avg accuracy is 0.8965457940251573
+
+[TRAINING] Epoch 23
+[TRAINING] Avg loss is 0.2828903142714275
+[TRAINING] Avg accuracy is 0.9019162735849057
+
+[TRAINING] Epoch 24
+[TRAINING] Avg loss is 0.29267033119246644
+[TRAINING] Avg accuracy is 0.8993465015723271
+
+[TRAINING] Epoch 25
+[TRAINING] Avg loss is 0.2972772836966335
+[TRAINING] Avg accuracy is 0.8991794418238994
+
+[TRAINING] Epoch 26
+[TRAINING] Avg loss is 0.2884532928747951
+[TRAINING] Avg accuracy is 0.9013806996855346
+
+[TRAINING] Epoch 27
+[TRAINING] Avg loss is 0.2895452817374805
+[TRAINING] Avg accuracy is 0.9029186320754716
+
+[TRAINING] Epoch 28
+[TRAINING] Avg loss is 0.2864140193417387
+[TRAINING] Avg accuracy is 0.9043582940251573
+
+[TRAINING] Epoch 29
+[TRAINING] Avg loss is 0.28797315834265835
+[TRAINING] Avg accuracy is 0.9021079009433962
+
+[TRAINING] Epoch 30
+[TRAINING] Avg loss is 0.2845459559334899
+[TRAINING] Avg accuracy is 0.9059797562893083
+
+[TRAINING] Epoch 31
+[TRAINING] Avg loss is 0.27434530910455956
+[TRAINING] Avg accuracy is 0.9050117924528303
+
+[TRAINING] Epoch 32
+[TRAINING] Avg loss is 0.27100254222750664
+[TRAINING] Avg accuracy is 0.9057045990566038
+
+[TRAINING] Epoch 33
+[TRAINING] Avg loss is 0.2712863067973335
+[TRAINING] Avg accuracy is 0.9056112421383649
+
+[TRAINING] Convergence criteria reached... Stopping training.
+
+[TRAINING] Final loss in this step 0.2712863067973335
+[TRAINING] Final acc in this step 0.9056112421383649
+[VALIDATION] Final loss in this step 0.24802279844880104
+[VALIDATION] Final acc in this step 0.918166893115942
+
+[CROSSVALIDATION] Results
+[TRAINING] Avg loss for the model is 0.3018536831480715
+[TRAINING] Avg acc for the model is 0.8977201257861636
+[VALIDATION] Avg loss for the model is 0.264767570172747
+[VALIDATION] Avg acc for the model is 0.9118404664855072
