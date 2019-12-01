@@ -38,18 +38,6 @@ class Report:
             
             return tuple(results)
 
-    def get_avg_epochs_for_convergence(self, path_dir):
-        files = os.listdir(path_dir)
-
-        epochs = 0
-        count = 0
-        for f in files:
-            if 'checkpoint' in f:
-                epochs += int(f[-5:-3])
-                count += 1
-
-        return epochs/count
-
     def get_models_cv_avgs(self, models_folder, k=10):
         files = os.listdir(models_folder)
 
@@ -58,11 +46,9 @@ class Report:
             path = os.path.join(models_folder, f)
             if os.path.isdir(path):
                 data = self.get_model_cv_avg(path, k=k)
-                epochs = self.get_avg_epochs_for_convergence(path)
 
                 model_data = ModelData(
-                    f, path, data[0], data[1], data[2], data[3],
-                    epochs_for_convergence=epochs)
+                    f, path, data[0], data[1], data[2], data[3])
 
                 models_data.append(model_data)
 
