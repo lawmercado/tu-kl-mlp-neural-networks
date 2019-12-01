@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class ModelData:
-    def __init__(self, model_name, path, tloss, tacc, vloss, vacc):
+    def __init__(self, model_name, path, tloss, tacc, vloss, vacc, 
+                 epochs_for_convergence=None):
         self.model_name = model_name
         self.model_base = model_name.split("_")[0]
         self.path = path
@@ -11,6 +12,7 @@ class ModelData:
         self.tacc = tacc
         self.vloss = vloss
         self.vacc = vacc
+        self.epochs = epochs_for_convergence
 
     def __repr__(self):
         d = ["model_name: {}".format(self.model_name),
@@ -36,6 +38,18 @@ class Report:
             
             return tuple(results)
 
+    def get_avg_epochs_for_convergence(self, path_dir):
+        files = os.listdir(path_dir)
+
+        epochs = 0
+        count = 0
+        for f in files:
+            if 'checkpoint' in f:
+                epochs += int(f[-5:-3])
+                count += 1
+
+        return epochs/count
+
     def get_models_cv_avgs(self, models_folder, k=10):
         files = os.listdir(models_folder)
 
@@ -44,9 +58,11 @@ class Report:
             path = os.path.join(models_folder, f)
             if os.path.isdir(path):
                 data = self.get_model_cv_avg(path, k=k)
+                epochs = self.get_avg_epochs_for_convergence(path)
 
                 model_data = ModelData(
-                    f, path, data[0], data[1], data[2], data[3])
+                    f, path, data[0], data[1], data[2], data[3],
+                    epochs_for_convergence=epochs)
 
                 models_data.append(model_data)
 
@@ -91,6 +107,19 @@ class Report:
                     do_means.append(m.vloss)
                 else:
                     pure_means.append(m.vloss)
+        elif stat == 'epochs':
+            ylabel = 'Epochs for Convergence'
+            ylim = [0, 100]
+            for m in results:
+                if 'bn' in m.model_name and 'dropout' in m.model_name:
+                    bn_do_means.append(m.epochs)
+                elif 'bn' in m.model_name:
+                    bn_means.append(m.epochs)
+                elif 'dropout' in m.model_name:
+                    do_means.append(m.epochs)
+                else:
+                    pure_means.append(m.epochs)
+
 
         fig, ax = plt.subplots()
         rects1 = ax.bar(x_pure, pure_means, width, label='Pure')
@@ -133,9 +162,15 @@ def comparison_models_acc(models_folder):
     report = Report()
     report.plot_cv_data(models_folder, stat='acc')
 
+
 def comparison_models_loss(models_folder):
     report = Report()
     report.plot_cv_data(models_folder, stat='loss')
+
+
+def comparison_models_epochs(models_folder):
+    report = Report()
+    report.plot_cv_data(models_folder, stat='epochs')
 
 
 if __name__ == "__main__":
@@ -143,7 +178,7 @@ if __name__ == "__main__":
             "tu-kl-mlp-neural-networks/"
             "logs/model-select/models")
 
-    comparison_models_loss(path)
+    comparison_models_epochs(path)
 
 
 
